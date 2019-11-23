@@ -10,7 +10,7 @@ const server = express();
 server.use(cors(), helmet(), express.json());
 
 // Routers
-//const usersRouter = require("../controllers/user");
+const usersRouter = require("../controllers/user");
 //const authRouter = require("../controllers/auth");
 //const allegiancesRouter = require("../controllers/allegiance");
 
@@ -18,7 +18,7 @@ server.use(cors(), helmet(), express.json());
 const errorHandler = require("../middleware/errorHandling");
 
 // API endpoints
-// server.use("/users", usersRouter);
+server.use("/users", usersRouter);
 // server.use("/auth", authRouter);
 // server.use('/allegiances', allegiancesRouter);
 
