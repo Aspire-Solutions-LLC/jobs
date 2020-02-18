@@ -4,11 +4,12 @@ require("dotenv").config();
 module.exports = {
   development: {
     client: "pg",
-    connection: {
-      host: '127.0.0.1',
-      database: process.env.DB_LOCAL,
-      user: process.env.DB_LOCAL_USER,
-      password: process.env.DB_LOCAL_PASSWORD
+    connection: process.env.DATABASE_URL || {
+      host: process.env.DB_HOST,
+      database: process.env.DB,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD, 
+      port: process.env.PORT
     },
     pool: {
       min: 2,
@@ -26,10 +27,12 @@ module.exports = {
 
   testing: {
     client: "pg",
-    connection: {
-      database: process.env.DB_LOCAL,
-      user: process.env.DB_LOCAL_USER,
-      password: process.env.DB_LOCAL_PASSWORD
+    connection: process.env.DATABASE_URL || {
+      host: process.env.DB_HOST,
+      database: process.env.DB,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD, 
+      port: process.env.PORT
     },
     pool: {
       min: 2,
@@ -48,9 +51,11 @@ module.exports = {
   production: {
     client: "pg",
     connection: process.env.DATABASE_URL || {
+      host: process.env.DB_HOST,
       database: process.env.DB,
       user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD
+      password: process.env.DB_PASSWORD, 
+      port: process.env.PORT
     },
     migrations: {
       directory: "./data/migrations",
