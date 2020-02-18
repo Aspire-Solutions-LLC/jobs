@@ -5,6 +5,7 @@ exports.up = function(knex) {
         users.string('email', 128).notNullable();
         users.string('category', 500).notNullable();
         users.string('frequency', 20).notNullable();
+        users.boolean('isDelete').defaultTo(false);
         users.timestamps(true,true);
     })
   };

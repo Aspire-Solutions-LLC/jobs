@@ -3,6 +3,7 @@ const db = require("../data/db-config");
 module.exports = {
   add,
   find,
+  findBy,
   update,
   remove
 };
@@ -10,7 +11,11 @@ module.exports = {
 function add(user) {
   return db("users")
     .insert(user, ["*"])
-    .then(u => find({ id: u[0].id }).first());
+    .then(u => find({ userId: u[0].userId }));
+}
+
+function findBy(filter) {
+  return db('users').where(filter);
 }
 
 function find(filters) {
@@ -19,10 +24,10 @@ function find(filters) {
   // note that neither return use the .first() method -- it's on a use-by-use basis if that is required or not
   if (filters) {
     return db("users")
-      .select("userId", "email", "firstName", "lastName", "companyId")
+      .select("email", "userId", "password")
       .where(filters);
-  }
-  return db("users").select("userId", "email", "firstName", "lastName", "companyId")
+  } 
+  return db("users").select("userId", "email", "password")
 }
 
 function update(filter, changes) {
@@ -30,10 +35,9 @@ function update(filter, changes) {
   return db("users")
     .update(changes, "*")
     .where(filter)
-    .then(u => find({ id: u[0].id }).first())
+    .then(u => find({ userId: u[0].userId }))
     
 }
-
 function remove(filter) {
   // only returns the number of deleted entries
   return db("users")
