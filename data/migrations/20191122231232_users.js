@@ -4,9 +4,7 @@ exports.up = function(knex) {
       users.increments('userId');
       users.string('email', 128).notNullable();
       users.string('password', 500).notNullable();
-      users.string('firstName', 128)
-      users.string('lastName', 128)
-      users.integer('companyId').notNullable();
+      users.boolean('isDelete').defaultTo(false);
       users.timestamps(true,true);
   })
 };
