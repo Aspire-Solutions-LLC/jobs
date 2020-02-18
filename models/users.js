@@ -3,6 +3,7 @@ const db = require("../data/db-config");
 module.exports = {
   add,
   find,
+  findBy,
   update,
   remove
 };
@@ -13,16 +14,20 @@ function add(user) {
     .then(u => find({ userId: u[0].userId }));
 }
 
+function findBy(filter) {
+  return db('users').where(filter);
+}
+
 function find(filters) {
   // if filters were passed in, search by filter. otherwise return all
 
   // note that neither return use the .first() method -- it's on a use-by-use basis if that is required or not
   if (filters) {
     return db("users")
-      .select("email", "userId")
+      .select("email", "userId", "password")
       .where(filters);
   } 
-  return db("users").select("userId", "email")
+  return db("users").select("userId", "email", "password")
 }
 
 function update(filter, changes) {

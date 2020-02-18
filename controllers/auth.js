@@ -22,9 +22,8 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
   let { email, password } = req.body;
-    const filter = { email: email };
-  Users.find(filter)
-    .first() 
+  Users.find({ email })
+  .first()
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
         // produce a token  
@@ -41,6 +40,7 @@ router.post('/login', (req, res) => {
     .catch(error => { 
     
       res.status(500).json(error); 
+      console.log(req.body)
       
     });
 });
@@ -48,7 +48,7 @@ router.post('/login', (req, res) => {
 function generateToken(user) {
   const jwtPayload = {
     subject: user.userId,
-    username: user.email
+    email: user.email
     };
 
   const jwtOptions = {
