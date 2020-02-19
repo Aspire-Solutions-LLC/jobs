@@ -50,6 +50,7 @@ module.exports = {
 
   production: {
     client: "pg",
+    ssl: true,
     connection: {
       host: process.env.DB_HOST,
       database: process.env.DB,
@@ -57,7 +58,7 @@ module.exports = {
       password: process.env.DB_PASSWORD, 
       port: process.env.PORT
     },
-    ssl: true,
+   
     migrations: {
       directory: "./data/migrations",
       tableName: "migrations"
