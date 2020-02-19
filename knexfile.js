@@ -4,7 +4,7 @@ require("dotenv").config();
 module.exports = {
   development: {
     client: "pg",
-    connection: process.env.DATABASE_URL || {
+    connection: {
       host: process.env.DB_HOST,
       database: process.env.DB,
       user: process.env.DB_USER,
@@ -27,7 +27,7 @@ module.exports = {
 
   testing: {
     client: "pg",
-    connection: process.env.DATABASE_URL || {
+    connection: {
       host: process.env.DB_HOST,
       database: process.env.DB,
       user: process.env.DB_USER,
@@ -50,16 +50,21 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection: process.env.DATABASE_URL || {
+    connection: {
       host: process.env.DB_HOST,
       database: process.env.DB,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD, 
       port: process.env.PORT
     },
+    ssl: true,
     migrations: {
       directory: "./data/migrations",
       tableName: "migrations"
+    },
+    pool: {
+      min: 2,
+      max: 10
     },
     seeds: {
       directory: "./data/seeds"
