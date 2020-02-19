@@ -1,5 +1,7 @@
 // Update with your config settings.
 require("dotenv").config();
+var pg = require("pg");
+pg.defaults.ssl = true;
 
 module.exports = {
   development: {
