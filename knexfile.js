@@ -50,7 +50,7 @@ module.exports = {
   },
 
   production: {
-    client: "pg",
+    client: "postgresql",
     connection: process.env.DATABASE_URL || {
       host: process.env.DB_HOST,
       database: process.env.DB,
@@ -61,10 +61,6 @@ module.exports = {
     migrations: {
       directory: "./data/migrations",
       tableName: "migrations"
-    },
-    pool: {
-      min: 2,
-      max: 10
     },
     seeds: {
       directory: "./data/seeds"
