@@ -52,12 +52,10 @@ module.exports = {
   production: {
     client: "postgresql",
     connection: process.env.DATABASE_URL || {
-      host: process.env.DB_HOST,
       database: process.env.DB,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD
     },
-   
     migrations: {
       directory: "./data/migrations",
       tableName: "migrations"
