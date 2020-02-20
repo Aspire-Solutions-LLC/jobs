@@ -52,12 +52,11 @@ module.exports = {
   production: {
     client: "pg",
     ssl: true,  
-    connection: {
+    connection: process.env.DATABASE_URL || {
       host: process.env.DB_HOST,
       database: process.env.DB,
       user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD, 
-      port: process.env.PORT
+      password: process.env.DB_PASSWORD
     },
    
     migrations: {
