@@ -7,8 +7,8 @@ const router = express.Router();
 router
   .route("/")
   .get(async (req, res) => {
-   // const users = await Users.find();
-   // res.status(200).json({ users });
+    const users = await Users.find();
+    res.status(200).json({ users });
    res.send("Welcome to Remote Jobs Board!");
   })
   .post(async (req, res) => {
